@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guilherme Azevedo | AI Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           Design Philosophy: Minimalismo Técnico com Acentos Neon
+           - Tema escuro profundo (#0a0a0a) com acentos ciano neon (#00d9ff)
+           - Tipografia: Poppins para títulos, Inter para corpo, Fira Code para técnico
+           - Animações suaves que não distraem do conteúdo
+           - Layout minimalista com espaçamento generoso
+           ============================================ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00d9ff;
+            --primary-foreground: #0a0a0a;
+            --background: #0a0a0a;
+            --foreground: #e8e8e8;
+            --card: #1a1a1a;
+            --card-foreground: #e8e8e8;
+            --secondary: #2a2a2a;
+            --secondary-foreground: #b8b8b8;
+            --muted: #3a3a3a;
+            --muted-foreground: #888888;
+            --accent: #00d9ff;
+            --accent-foreground: #0a0a0a;
+            --border: #2a2a2a;
+            --input: #1a1a1a;
+            --ring: #00d9ff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           Typography System
+           ============================================ */
+
+        .font-display {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .font-mono {
+            font-family: 'Fira Code', monospace;
+            font-weight: 400;
+        }
+
+        /* ============================================
+           Container & Layout
+           ============================================ */
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        /* ============================================
+           Navigation
+           ============================================ */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            background: transparent;
+            transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4rem;
+        }
+
+        .nav-logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.5), 0 0 20px rgba(0, 217, 255, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-size: 0.875rem;
+            color: var(--foreground);
+            text-decoration: none;
+            transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        /* ============================================
+           Language Toggle
+           ============================================ */
+
+        .lang-toggle {
+            display: flex;
+            gap: 0.25rem;
+            border: 1px solid var(--border);
+            border-radius: 0.25rem;
+            overflow: hidden;
+        }
+
+        .lang-btn {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            background: none;
+            border: none;
+            color: var(--muted-foreground);
+            padding: 0.25rem 0.6rem;
+            cursor: pointer;
+            transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.05em;
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            color: var(--accent-foreground);
+        }
+
+        .lang-btn:hover:not(.active) {
+            color: var(--foreground);
+        }
+
+        /* ============================================
+           Hero Section
+           ============================================ */
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding-top: 4rem;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 10, 10, 0.7);
+            z-index: 10;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            max-width: 48rem;
+            margin: 0 auto;
+            padding: 0 1rem;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .hero-subtitle {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.875rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.5), 0 0 20px rgba(0, 217, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--muted-foreground);
+            margin-bottom: 2rem;
+        }
+
+        .hero-description .accent {
+            color: var(--accent);
+        }
+
+        .hero-text {
+            font-size: 1rem;
+            color: var(--muted-foreground);
+            margin-bottom: 3rem;
+            max-width: 32rem;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (min-width: 640px) {
+            .hero-buttons {
+                flex-direction: row;
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+
+        .scroll-dot {
+            width: 1.5rem;
+            height: 2.5rem;
+            border: 2px solid var(--accent);
+            border-radius: 1rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 0.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-dot::before {
+            content: '';
+            width: 0.25rem;
+            height: 0.5rem;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: scrollBounce 2s infinite;
+        }
+
+        /* ============================================
+           Buttons
+           ============================================ */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 2rem;
+            font-weight: 500;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--accent-foreground);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3), 0 0 40px rgba(0, 217, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            background: transparent;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 217, 255, 0.1);
+        }
+
+        /* ============================================
+           Ticker / Tech Strip
+           ============================================ */
+
+        .ticker {
+            background: var(--card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ticker::before,
+        .ticker::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 80px;
+            z-index: 2;
+        }
+
+        .ticker::before {
+            left: 0;
+            background: linear-gradient(90deg, var(--card), transparent);
+        }
+
+        .ticker::after {
+            right: 0;
+            background: linear-gradient(-90deg, var(--card), transparent);
+        }
+
+        .ticker-track {
+            display: flex;
+            animation: tickerScroll 30s linear infinite;
+            white-space: nowrap;
+        }
+
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0 1.5rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--muted-foreground);
+            letter-spacing: 0.08em;
+            flex-shrink: 0;
+        }
+
+        .ticker-item .ticker-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        @keyframes tickerScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ============================================
+           Sections
+           ============================================ */
+
+        .section {
+            padding: 5rem 0;
+            border-top: 1px solid var(--border);
+            background-color: var(--background);
+            opacity: 0;
+            transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section.visible {
+            opacity: 1;
+        }
+
+        .section-dark {
+            background-color: var(--card);
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.5), 0 0 20px rgba(0, 217, 255, 0.3);
+        }
+
+        /* ============================================
+           About Section
+           ============================================ */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .about-text p {
+            color: var(--muted-foreground);
+            line-height: 1.8;
+        }
+
+        .about-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* ============================================
+           Cards
+           ============================================ */
+
+        .card {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--foreground);
+        }
+
+        .card p {
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+        }
+
+        /* ============================================
+           Skills Grid
+           ============================================ */
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background-color: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .skill-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--foreground);
+            transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .skill-card:hover h3 {
+            color: var(--accent);
+        }
+
+        .skill-card p {
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+        }
+
+        /* ============================================
+           Projects Grid
+           ============================================ */
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .project-card.empty {
+            border-style: dashed;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 16rem;
+        }
+
+        .project-card.empty:hover {
+            border-color: rgba(0, 217, 255, 0.5);
+        }
+
+        .project-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .project-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--foreground);
+            transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card:hover h3 {
+            color: var(--accent);
+        }
+
+        .project-card p {
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            background-color: rgba(0, 217, 255, 0.1);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* ============================================
+           Project Category Header
+           ============================================ */
+
+        .project-category {
+            margin-bottom: 3rem;
+        }
+
+        .project-category-title {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-category-title::before {
+            content: '//';
+            opacity: 0.5;
+        }
+
+        /* ============================================
+           Contact Section
+           ============================================ */
+
+        .contact-text {
+            font-size: 1.125rem;
+            color: var(--muted-foreground);
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 32rem;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (min-width: 640px) {
+            .contact-buttons {
+                flex-direction: row;
+            }
+        }
+
+        /* ============================================
+           Footer
+           ============================================ */
+
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            background-color: var(--background);
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+        }
+
+        /* ============================================
+           Animations
+           ============================================ */
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes scrollBounce {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0.75rem);
+                opacity: 0;
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(0, 217, 255, 0.5), 0 0 20px rgba(0, 217, 255, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(0, 217, 255, 0.8), 0 0 30px rgba(0, 217, 255, 0.6);
+            }
+        }
+
+        /* ============================================
+           Utility Classes
+           ============================================ */
+
+        .accent {
+            color: var(--accent);
+        }
+
+        .glow-neon {
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.5), 0 0 20px rgba(0, 217, 255, 0.3);
+        }
+
+        .transition-smooth {
+            transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ============================================
+           Responsive Design
+           ============================================ */
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.875rem;
+            }
+
+            .hero-buttons,
+            .contact-buttons {
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* ============================================
+           i18n visibility
+           ============================================ */
+
+        [data-lang="en"] .txt-pt { display: none !important; }
+        [data-lang="pt"] .txt-en { display: none !important; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-logo">GA</div>
+                <div class="nav-links">
+                    <a href="#sobre" class="nav-link txt-pt">Sobre</a>
+                    <a href="#sobre" class="nav-link txt-en">About</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#projetos" class="nav-link txt-pt">Projetos</a>
+                    <a href="#projetos" class="nav-link txt-en">Projects</a>
+                    <a href="#contato" class="nav-link txt-pt">Contato</a>
+                    <a href="#contato" class="nav-link txt-en">Contact</a>
+                    <div class="lang-toggle">
+                        <button class="lang-btn active" onclick="setLang('pt')">PT</button>
+                        <button class="lang-btn" onclick="setLang('en')">EN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-background" style="background-image: url('https://private-us-east-1.manuscdn.com/sessionFile/T7YvKTAuKNztWYzNEHHxjS/sandbox/08ie8pvSBDZ37PqV9RSwB9-img-1_1770863199000_na1fn_aGVyby1iYWNrZ3JvdW5k.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvVDdZdktUQXVLTnp0V1l6TkVISHhqUy9zYW5kYm94LzA4aWU4cHZTQkRaMzdQcVY5UlN3QjktaW1nLTFfMTc3MDg2MzE5OTAwMF9uYTFmbl9hR1Z5YnkxaVlXTnJaM0p2ZFc1ay5wbmc~eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsd18xOTIwLGhfMTkyMC9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=OD3AM-0V1kZAKj3ZSFGzC4b4eYgqwWNi6xdRlTX7FTFBf27XcNbpHiZqSv6wX6D65RpKEfD5SUmQxHwdjsDf4OSxBoprdn3SmZD6kxMZ956E5lw308RothKTm6rpPHHzSBsvolW7Z1luw2VcGW~JvfRyW51bSO0dWxjQJejivP8zI-0gRXF2hqKrEdslLEzSPUvONPFbjhrJDixqzfC3roMs5zRDyL2-4i6QjK1pF4S1gDxf5ZRwirnntcYEqCqGD4NaMjGpgPkmURq-adL3ODd9sdqGoOlu6~UIrf0X7QB2FkrX5kQtZtsIbdeoTNclQRKzJxEhmGrgXzmzgc9Y4A__')"></div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <p class="hero-subtitle txt-pt">Bem-vindo ao meu portfólio</p>
+                <p class="hero-subtitle txt-en">Welcome to my portfolio</p>
+                <h1 class="hero-title">Guilherme Azevedo</h1>
+                <p class="hero-description txt-pt"><span class="accent">AI Engineer</span> • LangChain • LangGraph</p>
+                <p class="hero-description txt-en"><span class="accent">AI Engineer</span> • LangChain • LangGraph</p>
+                <p class="hero-text txt-pt">
+                    Desenvolvedor especializado em Inteligência Artificial Generativa. Construo agentes inteligentes,
+                    sistemas de observabilidade para LLMs e automações com LangGraph e N8N — com foco em
+                    escalabilidade, segurança e geração de valor real.
+                </p>
+                <p class="hero-text txt-en">
+                    Developer specialized in Generative Artificial Intelligence. I build intelligent agents,
+                    LLM observability systems and automations with LangGraph and N8N — focused on
+                    scalability, security and real value generation.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projetos" class="btn btn-primary txt-pt">Ver Projetos</a>
+                    <a href="#projetos" class="btn btn-primary txt-en">View Projects</a>
+                    <a href="#contato" class="btn btn-secondary txt-pt">Entrar em Contato</a>
+                    <a href="#contato" class="btn btn-secondary txt-en">Get in Touch</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-dot"></div>
+        </div>
+    </section>
+
+    <!-- Tech Ticker -->
+    <div class="ticker">
+        <div class="ticker-track">
+            <span class="ticker-item">Azure<span class="ticker-dot"></span></span>
+            <span class="ticker-item">AWS<span class="ticker-dot"></span></span>
+            <span class="ticker-item">LangChain<span class="ticker-dot"></span></span>
+            <span class="ticker-item">LangGraph<span class="ticker-dot"></span></span>
+            <span class="ticker-item">Arize AI<span class="ticker-dot"></span></span>
+            <span class="ticker-item">LangSmith<span class="ticker-dot"></span></span>
+            <span class="ticker-item">N8N<span class="ticker-dot"></span></span>
+            <span class="ticker-item">LoRA<span class="ticker-dot"></span></span>
+            <span class="ticker-item">PEFT<span class="ticker-dot"></span></span>
+            <span class="ticker-item">Docker<span class="ticker-dot"></span></span>
+            <span class="ticker-item">FastAPI<span class="ticker-dot"></span></span>
+            <span class="ticker-item">Python<span class="ticker-dot"></span></span>
+            <span class="ticker-item">RAG<span class="ticker-dot"></span></span>
+            <!-- duplicate for seamless loop -->
+            <span class="ticker-item">Azure<span class="ticker-dot"></span></span>
+            <span class="ticker-item">AWS<span class="ticker-dot"></span></span>
+            <span class="ticker-item">LangChain<span class="ticker-dot"></span></span>
+            <span class="ticker-item">LangGraph<span class="ticker-dot"></span></span>
+            <span class="ticker-item">Arize AI<span class="ticker-dot"></span></span>
+            <span class="ticker-item">LangSmith<span class="ticker-dot"></span></span>
+            <span class="ticker-item">N8N<span class="ticker-dot"></span></span>
+            <span class="ticker-item">LoRA<span class="ticker-dot"></span></span>
+            <span class="ticker-item">PEFT<span class="ticker-dot"></span></span>
+            <span class="ticker-item">Docker<span class="ticker-dot"></span></span>
+            <span class="ticker-item">FastAPI<span class="ticker-dot"></span></span>
+            <span class="ticker-item">Python<span class="ticker-dot"></span></span>
+            <span class="ticker-item">RAG<span class="ticker-dot"></span></span>
+        </div>
+    </div>
+
+    <!-- Sobre Section -->
+    <section class="section" id="sobre">
+        <div class="container">
+            <h2 class="section-title txt-pt">Sobre Mim</h2>
+            <h2 class="section-title txt-en">About Me</h2>
+            <div class="about-grid">
+                <div class="about-text txt-pt">
+                    <p>
+                        Atuo desenvolvendo soluções baseadas em Inteligência Artificial,
+                        com foco em LLMs, arquitetura de agentes e sistemas inteligentes orientados à automação e tomada de decisão.
+                    </p>
+                    <p>
+                        Participei do desenvolvimento de projetos com <strong style="color: var(--foreground);">LangGraph</strong>, incluindo modelagem de grafos
+                        e subgrafos, definição de fluxos complexos, criação de guardrails e engenharia de prompts voltada à
+                        mitigação de prompt injection, vazamento de informações e comportamentos inesperados.
+                    </p>
+                    <p>
+                        Tenho experiência em <strong style="color: var(--foreground);">observabilidade para LLMs</strong> com LangSmith e Arize AI
+                        monitorando consumo de tokens, latência, histórico de conversas, logs de execução e identificação
+                        de tentativas maliciosas como prompt injection e prompt leak.
+                    </p>
+                    <p>
+                        Paralelamente, conduzo pesquisa de <strong style="color: var(--foreground);">Mestrado em Engenharia e Segurança</strong> aplicando
+                        IA e LLMs a sistemas altamente configuráveis como Linux, e desenvolvo estudos em
+                        pré-treinamento de modelos com LoRA e PEFT.
+                    </p>
+                </div>
+                <div class="about-text txt-en">
+                    <p>
+                        I work building Artificial Intelligence solutions,
+                        focused on LLMs, agent architecture and intelligent systems oriented toward automation and decision-making.
+                    </p>
+                    <p>
+                        I've been involved in projects using <strong style="color: var(--foreground);">LangGraph</strong>, including graph and subgraph
+                        modeling, complex flow definition, guardrail creation and prompt engineering aimed at mitigating
+                        prompt injection, information leakage and unexpected behaviors.
+                    </p>
+                    <p>
+                        I have experience implementing <strong style="color: var(--foreground);">LLM observability</strong> with LangSmith and Arize AI
+                        monitoring token consumption, latency, conversation history, execution logs and detecting
+                        malicious attempts such as prompt injection and prompt leak.
+                    </p>
+                    <p>
+                        In parallel, I conduct <strong style="color: var(--foreground);">MSc research in Engineering and Security</strong> applying
+                        AI and LLMs to highly configurable systems such as Linux, and pursue self-directed studies in
+                        model pre-training with LoRA and PEFT.
+                    </p>
+                </div>
+                <div class="about-cards">
+                    <div class="card">
+                        <div class="card-icon">🧠</div>
+                        <h3 class="txt-pt">Especialização</h3>
+                        <h3 class="txt-en">Specialization</h3>
+                        <p>GenIA, LangChain, LangGraph, LLMOps, RAG, Prompt Engineering, Guardrails</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🔬</div>
+                        <h3 class="txt-pt">Pesquisa & Formação</h3>
+                        <h3 class="txt-en">Research & Education</h3>
+                        <p class="txt-pt">Mestrado em Eng. & Segurança com IA/LLMs · Pré-treinamento com LoRA e PEFT · AWS Cloud Practitioner</p>
+                        <p class="txt-en">MSc in Engineering & Security with AI/LLMs · Pre-training with LoRA and PEFT · AWS Cloud Practitioner</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">⚡</div>
+                        <h3 class="txt-pt">Abordagem</h3>
+                        <h3 class="txt-en">Approach</h3>
+                        <p class="txt-pt">Escalabilidade, Observabilidade, Segurança de Agentes, Automação Inteligente</p>
+                        <p class="txt-en">Scalability, Observability, Agent Security, Intelligent Automation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section section-dark" id="skills">
+        <div class="container">
+            <h2 class="section-title txt-pt">Skills & Tecnologias</h2>
+            <h2 class="section-title txt-en">Skills & Technologies</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>LangGraph</h3>
+                    <p class="txt-pt">Orquestração de agentes, grafos, subgrafos e workflows complexos</p>
+                    <p class="txt-en">Agent orchestration, graphs, subgraphs and complex workflows</p>
+                </div>
+                <div class="skill-card">
+                    <h3>LangChain</h3>
+                    <p class="txt-pt">Framework para aplicações com LLMs e RAG</p>
+                    <p class="txt-en">Framework for LLM-powered applications and RAG</p>
+                </div>
+                <div class="skill-card">
+                    <h3>LangSmith / Arize AI</h3>
+                    <p class="txt-pt">Observabilidade, tracing, monitoramento e detecção de ameaças em LLMs</p>
+                    <p class="txt-en">Observability, tracing, monitoring and threat detection for LLMs</p>
+                </div>
+                <div class="skill-card">
+                    <h3>N8N</h3>
+                    <p class="txt-pt">Automação de fluxos e agentes integrados a sistemas corporativos</p>
+                    <p class="txt-en">Workflow automation and agents integrated with corporate systems</p>
+                </div>
+                <div class="skill-card">
+                    <h3>LoRA / PEFT</h3>
+                    <p class="txt-pt">Fine-tuning eficiente e pré-treinamento de modelos de linguagem</p>
+                    <p class="txt-en">Efficient fine-tuning and pre-training of language models</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Python</h3>
+                    <p class="txt-pt">Linguagem principal para IA, agentes e backend</p>
+                    <p class="txt-en">Primary language for AI, agents and backend development</p>
+                </div>
+                <div class="skill-card">
+                    <h3>AWS / Azure</h3>
+                    <p class="txt-pt">Cloud e infraestrutura para soluções de IA · AWS Practitioner Certified</p>
+                    <p class="txt-en">Cloud and infrastructure for AI solutions · AWS Practitioner Certified</p>
+                </div>
+                <div class="skill-card">
+                    <h3>FastAPI / Docker</h3>
+                    <p class="txt-pt">APIs escaláveis e containerização de soluções</p>
+                    <p class="txt-en">Scalable APIs and solution containerization</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Prompt Engineering</h3>
+                    <p class="txt-pt">Guardrails, anti-injection, segurança e mitigação de vazamento de dados</p>
+                    <p class="txt-en">Guardrails, anti-injection, security and data leakage mitigation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projetos Section -->
+    <section class="section" id="projetos">
+        <div class="container">
+            <h2 class="section-title txt-pt">Projetos</h2>
+            <h2 class="section-title txt-en">Projects</h2>
+
+            <!-- Categoria 1: Pré-Treinamento -->
+            <div class="project-category">
+                <div class="project-category-title txt-pt">Pré-Treinamento de Modelos</div>
+                <div class="project-category-title txt-en">Model Pre-Training</div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-icon">🧬</div>
+                        <h3 class="txt-pt">Fine-tuning com LoRA & PEFT</h3>
+                        <h3 class="txt-en">Fine-tuning with LoRA & PEFT</h3>
+                        <p class="txt-pt">Experimentos de fine-tuning eficiente em modelos de linguagem usando Low-Rank Adaptation e técnicas PEFT para adaptar LLMs a domínios específicos com custo computacional reduzido.</p>
+                        <p class="txt-en">Efficient fine-tuning experiments on language models using Low-Rank Adaptation and PEFT techniques to adapt LLMs to specific domains with reduced computational cost.</p>
+                        <div class="project-tags">
+                            <span class="tag">LoRA</span>
+                            <span class="tag">PEFT</span>
+                            <span class="tag">Python</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-icon">🔬</div>
+                        <h3>SDD — Self-Distillation</h3>
+                        <p class="txt-pt">Estudo em Self-Distillation with no Labels (SDD): técnica de destilação de conhecimento aplicada ao pré-treinamento de LLMs, explorando compressão e eficiência sem dados rotulados.</p>
+                        <p class="txt-en">Study on Self-Distillation with no Labels (SDD): knowledge distillation technique applied to LLM pre-training, exploring compression and efficiency without labeled data.</p>
+                        <div class="project-tags">
+                            <span class="tag">SDD</span>
+                            <span class="tag">LLM</span>
+                            <span class="tag">Research</span>
+                        </div>
+                    </div>
+                    <div class="project-card empty">
+                        <div class="project-icon">⚡</div>
+                        <p class="txt-pt">Próximo projeto em breve</p>
+                        <p class="txt-en">Next project coming soon</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categoria 2: Agentes de IA -->
+            <div class="project-category">
+                <div class="project-category-title txt-pt">Agentes de IA</div>
+                <div class="project-category-title txt-en">AI Agents</div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-icon">🤖</div>
+                        <h3 class="txt-pt">Agentes com LangGraph + Observabilidade</h3>
+                        <h3 class="txt-en">LangGraph Agents + Observability</h3>
+                        <p class="txt-pt">Construção de agentes com LangGraph incluindo modelagem de grafos e subgrafos, guardrails de segurança e observabilidade completa via LangSmith e Arize AI — monitorando tokens, latência e detectando prompt injection.</p>
+                        <p class="txt-en">Building agents with LangGraph including graph and subgraph modeling, security guardrails and full observability via LangSmith and Arize AI — monitoring tokens, latency and detecting prompt injection.</p>
+                        <div class="project-tags">
+                            <span class="tag">LangGraph</span>
+                            <span class="tag">LangSmith</span>
+                            <span class="tag">Arize AI</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-icon">📊</div>
+                        <h3 class="txt-pt">Geração Automatizada de Relatórios</h3>
+                        <h3 class="txt-en">Automated Report Generation</h3>
+                        <p class="txt-pt">Agente inteligente para geração automatizada de relatórios e envio de e-mails, com fluxos complexos definidos em LangGraph e guardrails para controle de comportamento.</p>
+                        <p class="txt-en">Intelligent agent for automated report generation and email sending, with complex flows defined in LangGraph and guardrails for behavior control.</p>
+                        <div class="project-tags">
+                            <span class="tag">LangGraph</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">FastAPI</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-icon">🔒</div>
+                        <h3 class="txt-pt">Segurança em Sistemas Linux com LLMs</h3>
+                        <h3 class="txt-en">Linux Security with LLMs</h3>
+                        <p class="txt-pt">Pesquisa de Mestrado: aplicação de IA e LLMs para engenharia e segurança de sistemas altamente configuráveis como Linux, desenvolvendo soluções para detecção e análise automatizada.</p>
+                        <p class="txt-en">MSc Research: applying AI and LLMs to engineering and security of highly configurable systems such as Linux, developing solutions for automated detection and analysis.</p>
+                        <div class="project-tags">
+                            <span class="tag">LLM</span>
+                            <span class="tag">Security</span>
+                            <span class="tag">Linux</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categoria 3: Agentes com N8N -->
+            <div class="project-category">
+                <div class="project-category-title">Agentes com N8N</div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-icon">⚙️</div>
+                        <h3 class="txt-pt">Automação de Fluxos Corporativos</h3>
+                        <h3 class="txt-en">Corporate Workflow Automation</h3>
+                        <p class="txt-pt">Orquestração de fluxos automatizados com N8N integrados a sistemas corporativos, combinando agentes de IA com automações inteligentes para otimização de processos de negócio.</p>
+                        <p class="txt-en">Orchestration of automated flows with N8N integrated into corporate systems, combining AI agents with intelligent automations to optimize business processes.</p>
+                        <div class="project-tags">
+                            <span class="tag">N8N</span>
+                            <span class="tag">Automation</span>
+                            <span class="tag">LLM</span>
+                        </div>
+                    </div>
+                    <div class="project-card empty">
+                        <div class="project-icon">⚡</div>
+                        <p class="txt-pt">Próximo projeto em breve</p>
+                        <p class="txt-en">Next project coming soon</p>
+                    </div>
+                    <div class="project-card empty">
+                        <div class="project-icon">⚡</div>
+                        <p class="txt-pt">Próximo projeto em breve</p>
+                        <p class="txt-en">Next project coming soon</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato Section -->
+    <section class="section section-dark" id="contato">
+        <div class="container">
+            <h2 class="section-title txt-pt">Vamos Conversar?</h2>
+            <h2 class="section-title txt-en">Let's Talk?</h2>
+            <p class="contact-text txt-pt">
+                Estou sempre aberto a novas oportunidades, colaborações e conversas sobre IA, agentes inteligentes e
+                tecnologia. Se você tem um projeto interessante ou quer trocar ideias, entre em contato.
+            </p>
+            <p class="contact-text txt-en">
+                I'm always open to new opportunities, collaborations and conversations about AI, intelligent agents and
+                technology. If you have an interesting project or want to exchange ideas, get in touch.
+            </p>
+            <div class="contact-buttons">
+                <a href="https://www.linkedin.com/in/guilherme-azevedo-dev/" target="_blank" class="btn btn-secondary">LinkedIn</a>
+                <a href="https://github.com/Guilhermeazevedo1" target="_blank" class="btn btn-secondary">GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="txt-pt">© 2025 Guilherme Azevedo. Desenvolvido com paixão por tecnologia.</p>
+            <p class="txt-en">© 2025 Guilherme Azevedo. Built with passion for technology.</p>
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * Portfolio Script
+         */
+
+        // ============================================
+        // Language Toggle
+        // ============================================
+
+        function setLang(lang) {
+            document.documentElement.setAttribute('data-lang', lang);
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+            });
+        }
+
+        // ============================================
+        // Navbar Scroll Effect
+        // ============================================
+
+        const navbar = document.getElementById('navbar');
+        let lastScrollY = 0;
+
+        window.addEventListener('scroll', () => {
+            lastScrollY = window.scrollY;
+            if (lastScrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ============================================
+        // Intersection Observer for Section Animations
+        // ============================================
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        const sections = document.querySelectorAll('.section');
+        sections.forEach((section) => {
+            observer.observe(section);
+        });
+
+        // ============================================
+        // Smooth Scroll Navigation
+        // ============================================
+
+        document.querySelectorAll('a[href^="#"]').forEach((link) => {
+            link.addEventListener('click', (e) => {
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    e.preventDefault();
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ============================================
+        // Hover Effects on Cards
+        // ============================================
+
+        const setupCardHoverEffects = () => {
+            const allCards = document.querySelectorAll('.card, .skill-card, .project-card');
+            allCards.forEach((card) => {
+                card.addEventListener('mouseenter', () => { card.style.transform = 'translateY(-4px)'; });
+                card.addEventListener('mouseleave', () => { card.style.transform = 'translateY(0)'; });
+            });
+        };
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setupCardHoverEffects);
+        } else {
+            setupCardHoverEffects();
+        }
+
+        // ============================================
+        // Initialize on Page Load
+        // ============================================
+
+        window.addEventListener('load', () => {
+            sections.forEach((section) => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    section.classList.add('visible');
+                }
+            });
+        });
+
+        console.log('%cGuilherme Azevedo - Portfólio', 'font-size: 20px; font-weight: bold; color: #00d9ff;');
+        console.log('%cAI Engineer • LangChain • LangGraph', 'font-size: 14px; color: #e8e8e8;');
+    </script>
+</body>
+</html>
