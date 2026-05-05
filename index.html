@@ -261,6 +261,15 @@
             align-items: center;
         }
 
+        /* Esconde scroll-dot e nav-logo (GA) em telas pequenas */
+        @media (max-width: 600px) {
+            .scroll-dot,
+            .scroll-indicator,
+            .nav-logo {
+                display: none !important;
+            }
+        }
+
         @media (min-width: 640px) {
             .hero-buttons {
                 flex-direction: row;
